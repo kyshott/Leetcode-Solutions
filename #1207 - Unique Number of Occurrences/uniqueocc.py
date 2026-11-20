@@ -1,19 +1,15 @@
 class Solution:
-    def uniqueOccurrences(self, arr: List[int]) -> bool:
+    def uniqueOccurrences(self, arr: list[int]) -> bool:
+        map = dict()
 
-        map = {}
-        vals = []
-
-        for i in range(0, len(arr)):
-            if(arr[i] in map):
-                map[arr[i]] += 1
+        for i in range(len(arr)):
+            if str(arr[i]) not in map:
+                map[str(arr[i])] = 0
+                map[str(arr[i])] += 1
             else:
-                 map.setdefault(arr[i], 1)
+                map[str(arr[i])] += 1
 
-        for val in map.values():
-            if(val in vals):
-                return False
-            
-            vals.append(val)
-        
-        return True
+        if len(set(map.values())) < len(map):
+            return False
+        else:
+            return True
